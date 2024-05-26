@@ -3,24 +3,24 @@ ifndef OUTPUT
 endif
 
 NAME	=	Colleen
-SRCS	=	Colleen.asm
+ARGS	=	
+SRCS	=	Colleen.c
 HEAD	=	Makefile
 SHELL	=	/bin/sh
-ASM		=	nasm -f elf64
-LD		= ld
-LDLIB	= --dynamic-linker /lib64/ld-linux-x86-64.so.2 -lc
-OBJS	=	Colleen.o
+CC		=	clang
+CCFLAGS	=	-Wall -Werror -Wextra -Wfatal-errors
+OBJS	=	$(SRCS:.c=.o)
 VAL		=	valgrind
-VALFLAG	=	--tool=memcheck \
+VALFLAG	=	-s --tool=memcheck \
 			--leak-check=full \
 			--show-leak-kinds=all \
 			--track-origins=yes \
 			--show-reachable=yes
 all:		$(NAME)
 $(NAME):	$(OBJS)
-	$(LD) -o $(NAME) $(OBJS) $(LDLIB)
-$(OBJS):	%.o : %.asm $(HEAD)
-	$(ASM) $<
+	$(CC) $(CCFLAGS) $(OBJS) -o $(NAME)
+$(OBJS):	%.o : %.c $(HEAD)
+	$(CC) $(CCFLAGS) -o $@ -c $<
 clean:
 	-rm -f $(OBJS)
 fclean:		clean
@@ -30,14 +30,8 @@ rt:			re t
 vf:			all
 	$(VAL) $(VALFLAG) ./$(NAME) $(ARGS)
 t:			all
-	@echo "execution:"
-	./$(NAME)
-diff:
-	@echo "diff:"
-	./$(NAME) > tmp
-	diff $(SRCS) tmp && echo "[ OK ]" || echo "[ KO ]"
-	@rm tmp
+	./$(NAME) $(ARGS)
 v:			all
-	$(VAL) ./$(NAME)
+	$(VAL) ./$(NAME) $(ARGS)
 rv:			re v
 rvf:		re vf
