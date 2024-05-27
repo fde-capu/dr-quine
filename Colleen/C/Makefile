@@ -3,7 +3,6 @@ ifndef OUTPUT
 endif
 
 NAME	=	Colleen
-ARGS	=	
 SRCS	=	Colleen.c
 HEAD	=	Makefile
 SHELL	=	/bin/sh
@@ -28,10 +27,19 @@ fclean:		clean
 re:			fclean all
 rt:			re t
 vf:			all
-	$(VAL) $(VALFLAG) ./$(NAME) $(ARGS)
+	$(VAL) $(VALFLAG) ./$(NAME)
 t:			all
-	./$(NAME) $(ARGS)
+	@echo "execution:"
+	./$(NAME)
+d:
+	@echo "diff:"
+	./$(NAME) > tmp
+	diff $(SRCS) tmp && echo "[ OK ]" || echo "[ KO ]"
+	@rm tmp
 v:			all
-	$(VAL) ./$(NAME) $(ARGS)
+	$(VAL) ./$(NAME)
 rv:			re v
 rvf:		re vf
+td:			t d
+rtd:		re t d
+rd:			re d
