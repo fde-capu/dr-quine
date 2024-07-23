@@ -1,14 +1,14 @@
 ifndef OUTPUT
-.SILENT:
+#.SILENT:
 endif
 
 NAME	=	Colleen
 SRCS	=	Colleen.asm
 HEAD	=	Makefile
 SHELL	=	/bin/sh
-ASM		=	nasm -f elf64
+ASM		=	nasm -f elf64 -Wall -Werror -g
 LD		= ld
-LDLIB	= --dynamic-linker /lib64/ld-linux-x86-64.so.2 -lc
+LDLIB	= -m elf_x86_64 -lc --dynamic-linker /lib64/ld-linux-x86-64.so.2
 OBJS	=	Colleen.o
 VAL		=	valgrind
 VALFLAG	=	--tool=memcheck \
@@ -32,13 +32,16 @@ vf:			all
 t:			all
 	@echo "execution:"
 	./$(NAME)
-d:
+d:			all
 	@echo "diff:"
 	./$(NAME) > tmp
 	diff $(SRCS) tmp && echo "[ OK ]" || echo "[ KO ]"
 	@rm tmp
 v:			all
 	$(VAL) ./$(NAME)
+g:			all
+	gdb ./$(NAME)
+rg:			re g
 rv:			re v
 rvf:		re vf
 td:			t d
