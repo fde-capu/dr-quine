@@ -26,4 +26,3 @@ _start:
 	mov eax, 60
 	xor edi, edi
 	syscall
-
