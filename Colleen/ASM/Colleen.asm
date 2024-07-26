@@ -1,33 +1,28 @@
-; Comment A
 section .data
-s db "; Comment A%csection .data%cc db %c%cn%ct%c%c%c%c%c%cs...", 0
-f db 10,10,34,92,92,92,34,92,92,34,34
+    format db "Hello World!", 0
 
 section .text
-extern printf
+    extern printf
+		extern fflush
+    global _start
 
-global _start
 _start:
-	lea rdi, [f]
-	lea rsi, [s]
-	mov ecx, 11
-	xor edx, edx
+    ; Prepare arguments for printf
+    mov rdi, format     ; First argument is the format string
+    xor rax, rax        ; Zero out rax to indicate no vector registers used
 
-	call main
-	mov rax, 60
-	mov rdi, 0
-	syscall
+		push rbp
+		mov rbp, rsp
 
-main:
-	; Comment B
-	dec ecx
-	cmp ecx, 0
-	je done
-	mov al, ','
-	stosb
-	inc byte [esi]
-	jmp main
+    call printf         ; Call printf
 
-done:
-	call printf
-	ret
+		mov rdi, 0
+		call fflush
+
+		mov rsp, rbp
+		pop rbp
+
+    ; Exit the program
+    mov eax, 60         ; System call number for exit
+    xor edi, edi        ; Exit code 0
+    syscall             ; Make the system call

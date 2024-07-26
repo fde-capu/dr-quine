@@ -19,7 +19,7 @@ VALFLAG	=	--tool=memcheck \
 all:		$(NAME)
 $(NAME):	$(OBJS)
 	$(LD) -o $(NAME) $(OBJS) $(LDLIB)
-$(OBJS):	%.o : %.asm $(HEAD)
+$(OBJS):	%.o : %.asm $(HEAD) $(SRC)
 	$(ASM) $<
 clean:
 	-rm -f $(OBJS)
@@ -30,7 +30,6 @@ rt:			re t
 vf:			all
 	$(VAL) $(VALFLAG) ./$(NAME) $(ARGS)
 t:			all
-	@echo "execution:"
 	./$(NAME)
 d:			all
 	@echo "diff:"
