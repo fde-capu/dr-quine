@@ -1,28 +1,28 @@
 section .data
-    format db "Hello World!", 0
+	format db "Hello %s!", 0
+	world db "World", 0
 
 section .text
-    extern printf
-		extern fflush
-    global _start
+	extern printf
+	extern fflush
+	global _start
 
 _start:
-    ; Prepare arguments for printf
-    mov rdi, format     ; First argument is the format string
-    xor rax, rax        ; Zero out rax to indicate no vector registers used
+	lea rdi, [rel format]
+	lea rsi, [rel world]
+	xor rax, rax
 
-		push rbp
-		mov rbp, rsp
+	push rbp
+	mov rbp, rsp
 
-    call printf         ; Call printf
+	call printf
 
-		mov rdi, 0
-		call fflush
+	mov rdi, 0
+	call fflush
 
-		mov rsp, rbp
-		pop rbp
+	mov rsp, rbp
+	pop rbp
 
-    ; Exit the program
-    mov eax, 60         ; System call number for exit
-    xor edi, edi        ; Exit code 0
-    syscall             ; Make the system call
+	mov eax, 60
+	xor edi, edi
+	syscall
