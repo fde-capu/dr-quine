@@ -1,6 +1,6 @@
 ; Comment!
 section .data
-	quine db "; Comment!%ssection .data%squine db %s%s%s, 0%sn db 0x0A, 0%snt db 0x0A, 0x09, 0%sq db 0x22, 0%sp db 0x25, 0%ssection .text%sextern printf%sextern fflush%sglobal _start%s%smacro X 2%s%srep %s2%spush %s1%s%sendrep%s%sendmacro%s_start:%s; Comment inside start.%spush rbp%smov rbp, rsp%smov rdi, quine%smov rsi, n%smov rdx, nt%smov rcx, q%smov r8, quine%smov r9, q%spush n%sX nt, 33%sX n, 2%spush p%spush n%spush p%spush n%spush p%spush nt%sX p, 2%spush n%spush p%spush n%sX nt, 3%spush n%sX nt, 4%sxor rax, rax%scall printf%smov rdi, 0%scall fflush%smov rsp, rbp%spop rbp%smov eax, 60%sxor edi, edi%ssyscall%s", 0
+	quine db "; Comment!%ssection .data%squine db %s%s%s, 0%sn db 0x0A, 0%snt db 0x0A, 0x09, 0%sq db 0x22, 0%sp db 0x25, 0%ssection .text%sextern printf%sextern fflush%sglobal _start%s%smacro X 2%s%srep %s2%spush %s1%s%sendrep%s%sendmacro%s_start:%scall _main%smov eax, 60%sxor edi, edi%ssyscall%s_main:%s; Comment inside main.%spush rbp%smov rbp, rsp%smov rdi, quine%smov rsi, n%smov rdx, nt%smov rcx, q%smov r8, quine%smov r9, q%spush n%sX nt, 6%spush n%sX nt, 31%sX n, 2%sX nt, 4%spush n%spush p%scall npn%spush p%spush nt%sX p, 2%scall npn%sX nt, 3%spush n%sX nt, 4%sxor rax, rax%scall printf%smov rdi, 0%scall fflush%smov rsp, rbp%spop rbp%sret%snpn:%spop rax%spush n%spush p%spush n%spush rax%sret%s", 0
 	n db 0x0A, 0
 	nt db 0x0A, 0x09, 0
 	q db 0x22, 0
@@ -15,7 +15,12 @@ section .text
 %endrep
 %endmacro
 _start:
-; Comment inside start.
+	call _main
+	mov eax, 60
+	xor edi, edi
+	syscall
+_main:
+; Comment inside main.
 	push rbp
 	mov rbp, rsp
 	mov rdi, quine
@@ -25,18 +30,18 @@ _start:
 	mov r8, quine
 	mov r9, q
 	push n
-	X nt, 33
+	X nt, 6
+	push n
+	X nt, 31
 	X n, 2
-	push p
+	X nt, 4
 	push n
 	push p
-	push n
+	call npn
 	push p
 	push nt
 	X p, 2
-	push n
-	push p
-	push n
+	call npn
 	X nt, 3
 	push n
 	X nt, 4
@@ -46,6 +51,11 @@ _start:
 	call fflush
 	mov rsp, rbp
 	pop rbp
-	mov eax, 60
-	xor edi, edi
-	syscall
+	ret
+npn:
+	pop rax
+	push n
+	push p
+	push n
+	push rax
+	ret
