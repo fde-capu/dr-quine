@@ -1,9 +1,6 @@
-/*
-'What is there?' It can be answered, moreover, in a word - 'Everything' - and everyone will accept this answer as true.
-*/
+//X
 #include <stdio.h>
+char get_n(){return 10;}
 int main(){
-/*
-"Yields falsehood when preceded by its quotation" yields falsehood when preceded by its quotation.
-*/
-char*c="\n\t\"\\";char*s="/*%c'What is there?' It can be answered, moreover, in a word - 'Everything' - and everyone will accept this answer as true.%c*/%c#include <stdio.h>%cint main(){%c/*%c%cYields falsehood when preceded by its quotation%c yields falsehood when preceded by its quotation.%c*/%cchar*c=%c%cn%ct%c%c%c%c%c;char*s=%c%s%c;printf(s,c[0],c[0],c[0],c[0],c[0],c[0],c[2],c[2],c[0],c[0],c[2],c[3],c[3],c[3],c[2],c[3],c[3],c[2],c[2],s,c[2],c[0]);}%c";printf(s,c[0],c[0],c[0],c[0],c[0],c[0],c[2],c[2],c[0],c[0],c[2],c[3],c[3],c[3],c[2],c[3],c[3],c[2],c[2],s,c[2],c[0]);}
+//X
+char n=get_n();char q=34;char*s="//X%c#include <stdio.h>%cchar get_n(){return 10;}%cint main(){%c//X%cchar n=get_n();char q=34;char*s=%c%s%c;printf(s,n,n,n,n,n,q,s,q,n);}%c";printf(s,n,n,n,n,n,q,s,q,n);}
