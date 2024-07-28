@@ -1,6 +1,13 @@
+;X
+%define N 10
+%define Q 34
+%define F 'Grace_kit.asm'
+%macro X 0
 section .data
-o db 'Grace_kid.asm', 0
+o db F, 0
 m db 'w', 0
+n db N
+q db Q
 s db '%s', 0
 section .text
 extern fprintf
@@ -10,7 +17,7 @@ global _start
 _start:
 mov rdi,o
 mov rsi,m
-call fopen ; now rax - FILE* to operate
+call fopen
 mov rdi,rax
 mov rsi,s
 mov rdx,o
@@ -22,3 +29,5 @@ call fclose
 mov rax, 60
 xor rdi, rdi
 syscall
+%endmacro
+X
