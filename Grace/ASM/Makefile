@@ -27,22 +27,17 @@ clean:
 fclean:		clean
 	-rm -f $(NAME)
 re:			fclean all
-rt:			re t
 vf:			all
 	$(VAL) $(VALFLAG) ./$(NAME) $(ARGS)
-t:			all
+t:			re
 	./$(NAME)
-d:			all
+d:			re
 	@echo "diff:"
 	./Grace
 	diff Grace.asm Grace_kid.asm && echo "[ OK ]" || echo "[ KO ]"
 v:			all
 	$(VAL) ./$(NAME)
-rg:			re g
-rv:			re v
-rvf:		re vf
-td:			t d
-rtd:		re t d
-rd:			re d
 g:			re
 	gdb ./$(NAME)
+s:			re t
+	cat ./Grace_kid.asm
