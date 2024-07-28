@@ -26,6 +26,7 @@ clean:
 	-rm -f $(OBJS)
 fclean:		clean
 	-rm -f $(NAME)
+	-rm -f Grace_kid.asm
 re:			fclean all
 vf:			all
 	$(VAL) $(VALFLAG) ./$(NAME) $(ARGS)
