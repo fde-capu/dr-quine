@@ -14,7 +14,8 @@ VALFLAG	=	-s --tool=memcheck \
 			--leak-check=full \
 			--show-leak-kinds=all \
 			--track-origins=yes \
-			--show-reachable=yes
+			--show-reachable=yes \
+			--track-origins=yes
 all:		$(NAME)
 $(NAME):	$(OBJS)
 	$(CC) $(CCFLAGS) $(OBJS) -o $(NAME)
@@ -30,13 +31,11 @@ rt:			re t
 vf:			all
 	$(VAL) $(VALFLAG) ./$(NAME)
 t:			all
-	@echo "execution:"
 	./$(NAME)
-d:
+d:			all
 	@echo "diff:"
-	./$(NAME) > tmp
-	diff $(SRCS) tmp && echo "[ OK ]" || echo "[ KO ]"
-	@rm tmp
+	./Grace
+	diff Grace.c Grace_kid.c && echo "[ OK ]" || echo "[ KO ]"
 v:			all
 	$(VAL) ./$(NAME)
 rv:			re v
@@ -44,3 +43,5 @@ rvf:		re vf
 td:			t d
 rtd:		re t d
 rd:			re d
+g:			re
+	gdb ./$(NAME)
