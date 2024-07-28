@@ -16,7 +16,7 @@ VALFLAG	=	--tool=memcheck \
 			--show-leak-kinds=all \
 			--track-origins=yes \
 			--show-reachable=yes \
-			--treack-origins=yes
+			--track-origins=yes
 all:		$(NAME)
 $(NAME):	$(OBJS)
 	$(LD) -o $(NAME) $(OBJS) $(LDLIB)
