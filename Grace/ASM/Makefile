@@ -3,7 +3,7 @@ ifndef OUTPUT
 endif
 
 NAME	=	Grace
-SRCS	=	Grace.asm
+SRCS	=	Grace.s
 HEAD	=	Makefile
 SHELL	=	/bin/sh
 ASM		=	nasm -f elf64 -Wall -Werror -g
@@ -20,13 +20,13 @@ VALFLAG	=	--tool=memcheck \
 all:		$(NAME)
 $(NAME):	$(OBJS)
 	$(LD) -o $(NAME) $(OBJS) $(LDLIB)
-$(OBJS):	%.o : %.asm $(HEAD) $(SRC)
+$(OBJS):	%.o : %.s $(HEAD) $(SRC)
 	$(ASM) $<
 clean:
 	-rm -f $(OBJS)
 fclean:		clean
 	-rm -f $(NAME)
-	-rm -f Grace_kid.asm
+	-rm -f Grace_kid.s
 re:			fclean all
 vf:			all
 	$(VAL) $(VALFLAG) ./$(NAME) $(ARGS)
@@ -35,10 +35,10 @@ t:			re
 d:			re
 	@echo "diff:"
 	./Grace
-	diff Grace.asm Grace_kid.asm && echo "[ OK ]" || echo "[ KO ]"
+	diff Grace.s Grace_kid.s && echo "[ OK ]" || echo "[ KO ]"
 v:			all
 	$(VAL) ./$(NAME)
 g:			re
 	gdb ./$(NAME)
 s:			re t
-	cat ./Grace_kid.asm
+	cat ./Grace_kid.s
