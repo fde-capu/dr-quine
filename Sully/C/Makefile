@@ -6,7 +6,7 @@ NAME	=	Sully
 SRCS	=	Sully.c
 HEAD	=	Makefile
 SHELL	=	/bin/sh
-CC		=	clang
+CC		=	gcc
 CCFLAGS	=	-Wall -Werror -Wextra -Wfatal-errors
 OBJS	=	$(SRCS:.c=.o)
 VAL		=	valgrind
@@ -25,6 +25,7 @@ clean:
 	-rm -f $(OBJS)
 fclean:		clean
 	-rm -f $(NAME)
+	-rm -f Sully_*
 re:			fclean all
 rt:			re t
 vf:			all
@@ -34,7 +35,11 @@ t:			all
 d:			all
 	@echo "diff:"
 	./Sully
-#	diff Sully.c Grace_kid.c && echo "[ OK ]" || echo "[ KO ]"
+	-diff Sully.c Sully_4.c
+	-diff Sully_4.c Sully_3.c
+	-diff Sully_3.c Sully_2.c
+	-diff Sully_2.c Sully_1.c
+	-diff Sully_1.c Sully_0.c
 v:			all
 	$(VAL) ./$(NAME)
 rv:			re v
