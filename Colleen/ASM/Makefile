@@ -3,7 +3,7 @@ ifndef OUTPUT
 endif
 
 NAME	=	Colleen
-SRCS	=	Colleen.asm
+SRCS	=	Colleen.s
 HEAD	=	Makefile
 SHELL	=	/bin/sh
 ASM		=	nasm -f elf64 -Wall -Werror -g
@@ -19,7 +19,7 @@ VALFLAG	=	--tool=memcheck \
 all:		$(NAME)
 $(NAME):	$(OBJS)
 	$(LD) -o $(NAME) $(OBJS) $(LDLIB)
-$(OBJS):	%.o : %.asm $(HEAD) $(SRC)
+$(OBJS):	%.o : %.s $(HEAD) $(SRC)
 	$(ASM) $<
 clean:
 	-rm -f $(OBJS)
