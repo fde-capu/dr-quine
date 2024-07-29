@@ -31,7 +31,7 @@ vf:			all
 t:			all
 	@echo "execution:"
 	./$(NAME)
-d:
+d:			all
 	@echo "diff:"
 	./$(NAME) > tmp
 	diff $(SRCS) tmp && echo "[ OK ]" || echo "[ KO ]"
