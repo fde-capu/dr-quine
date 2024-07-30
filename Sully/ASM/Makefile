@@ -36,10 +36,10 @@ d:			all
 	@echo "diff:"
 	./Sully
 	-diff Sully.s Sully_4.s
-	-diff Sully_4.s Sully_3.s
-	-diff Sully_3.s Sully_2.s
-	-diff Sully_2.s Sully_1.s
-	-diff Sully_1.s Sully_0.s
+#	-diff Sully_4.s Sully_3.s
+#	-diff Sully_3.s Sully_2.s
+#	-diff Sully_2.s Sully_1.s
+#	-diff Sully_1.s Sully_0.s
 v:			all
 	$(VAL) ./$(NAME)
 g:			re
