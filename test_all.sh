@@ -4,7 +4,7 @@ echo -n "=== Colleen/C =====> "
 cd Colleen/C
 make d
 make fclean
-echo -n "=== Colleen/ASN ===> "
+echo -n "=== Colleen/ASM ===> "
 cd ../../Colleen/ASM
 make d
 make fclean
