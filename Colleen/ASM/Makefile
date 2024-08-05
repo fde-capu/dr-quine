@@ -32,7 +32,6 @@ vf:			all
 t:			all
 	./$(NAME)
 d:			all
-	@echo "diff:"
 	./$(NAME) > tmp
 	diff $(SRCS) tmp && echo "[ OK ]" || echo "[ KO ]"
 	@rm tmp

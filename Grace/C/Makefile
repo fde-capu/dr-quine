@@ -33,7 +33,6 @@ vf:			all
 t:			all
 	./$(NAME)
 d:			all
-	@echo "diff:"
 	./Grace
 	diff Grace.c Grace_kid.c && echo "[ OK ]" || echo "[ KO ]"
 v:			all

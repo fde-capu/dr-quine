@@ -1,32 +1,28 @@
 #!/bin/sh
 echo
-echo "=== Colleen/C ==="
+echo -n "=== Colleen/C =====> "
 cd Colleen/C
 make d
 make fclean
-echo
-echo "=== Colleen/ASN ==="
+echo -n "=== Colleen/ASN ===> "
 cd ../../Colleen/ASM
 make d
 make fclean
-echo
-echo "=== Grace/C ==="
+echo -n "=== Grace/C =======> "
 cd ../../Grace/C
 make d
 make fclean
-echo
-echo "=== Grace/ASM ==="
+echo -n "=== Grace/ASM =====> "
 cd ../../Grace/ASM
 make d
 make fclean
-echo
-echo "=== Sully/C ==="
+echo -n "=== Sully/C =======> "
 cd ../../Sully/C
 make d
 make fclean
-echo
-echo "=== Sully/ASM ==="
+echo -n "=== Sully/ASM =====> "
 cd ../../Sully/ASM
 make d
 make fclean
 cd ../..
+echo
