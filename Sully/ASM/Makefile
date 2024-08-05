@@ -33,19 +33,14 @@ vf:			all
 t:			re
 	./$(NAME)
 d:			all
-	@echo "diff:"
 	./Sully
-	-echo -e '-----------\n< Sully.s, Sully_4.s >'
-	-diff Sully.s Sully_4.s
-	-echo -e '-----------\n< Sully_4.s, Sully_3.s >'
-	-diff Sully_4.s Sully_3.s
-	-echo -e '-----------\n< Sully_3.s, Sully_2.s >'
-	-diff Sully_3.s Sully_2.s
-	-echo -e '-----------\n< Sully_2.s, Sully_1.s >'
-	-diff Sully_2.s Sully_1.s
-	-echo -e '-----------\n< Sully_1.s, Sully_0.s >'
-	-diff Sully_1.s Sully_0.s
-	-echo -e '-----------\n'
+	-diff Sully.s Sully_4.s > diff_out
+	-diff Sully_4.s Sully_3.s >> diff_out
+	-diff Sully_3.s Sully_2.s >> diff_out
+	-diff Sully_2.s Sully_1.s >> diff_out
+	-diff Sully_1.s Sully_0.s >> diff_out
+	diff diff_model diff_out && echo '[ OK ]' || echo '[ KO ]'
+	-rm -f diff_out
 v:			all
 	$(VAL) ./$(NAME)
 g:			re
