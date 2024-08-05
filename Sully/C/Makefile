@@ -33,13 +33,14 @@ vf:			all
 t:			all
 	./$(NAME)
 d:			all
-	@echo "diff:"
 	./Sully
-	-diff Sully.c Sully_4.c
-	-diff Sully_4.c Sully_3.c
-	-diff Sully_3.c Sully_2.c
-	-diff Sully_2.c Sully_1.c
-	-diff Sully_1.c Sully_0.c
+	-diff Sully.c Sully_4.c > diff_out
+	-diff Sully_4.c Sully_3.c >> diff_out
+	-diff Sully_3.c Sully_2.c >> diff_out
+	-diff Sully_2.c Sully_1.c >> diff_out
+	-diff Sully_1.c Sully_0.c >> diff_out
+	diff diff_model diff_out && echo '[ OK ]' || echo '[ KO ]'
+	-rm -f diff_out
 v:			all
 	$(VAL) ./$(NAME)
 rv:			re v
