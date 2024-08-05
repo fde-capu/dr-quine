@@ -6,7 +6,7 @@ NAME	=	Sully
 SRCS	=	Sully.s
 HEAD	=	Makefile
 SHELL	=	/bin/sh
-ASM		=	nasm -f elf64 -Wall -Werror
+ASM		=	nasm -f elf64 -Wall -Werror -g
 LD		= ld
 LDLIB	= -m elf_x86_64 -lc --dynamic-linker /lib64/ld-linux-x86-64.so.2
 OBJS	=	Sully.o
@@ -35,11 +35,16 @@ t:			re
 d:			all
 	@echo "diff:"
 	./Sully
+	-echo '< Sully.s, Sully_4.s >'
 	-diff Sully.s Sully_4.s
-#	-diff Sully_4.s Sully_3.s
-#	-diff Sully_3.s Sully_2.s
-#	-diff Sully_2.s Sully_1.s
-#	-diff Sully_1.s Sully_0.s
+	-echo '< Sully_4.s, Sully_3.s >'
+	-diff Sully_4.s Sully_3.s
+	-echo '< Sully_3.s, Sully_2.s >'
+	-diff Sully_3.s Sully_2.s
+	-echo '< Sully_2.s, Sully_1.s >'
+	-diff Sully_2.s Sully_1.s
+	-echo '< Sully_1.s, Sully_0.s >'
+	-diff Sully_1.s Sully_0.s
 v:			all
 	$(VAL) ./$(NAME)
 g:			re
