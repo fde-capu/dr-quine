@@ -1,4 +1,6 @@
-;X
+;
+; X
+;
 %define N 10
 %define Q 39
 %define P 37
@@ -28,26 +30,9 @@ call fopen
 mov rdi,rax
 mov rsi,s
 mov rdx,n
-mov rcx,p
-mov r8,n
-mov r9,p
-push rax
-D push,n,2
-push np
-D push,n,39
-push q
-push s
-push q
-D push,n,5
-D push,q,2
-push n
-D push,q,2
-D push,n,2
-D push,np,3
-push p
-push np
-push p
-D push,np,3
+mov rcx,q
+mov r8,p
+mov r9,s
 xor rax,rax
 call fprintf
 D pop,rdi,67
