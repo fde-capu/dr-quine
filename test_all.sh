@@ -45,9 +45,13 @@ rm b
 
 echo -n "=== Sully/Python =====> "
 cd ../../Sully/Python
-./Sully.py > b
-diff Sully.py b > /dev/null && echo '[ OK ]' || echo '[ KO ]'
-rm b
+./Sully.py
+diff Sully.py Sully_4.py > diff_out
+diff Sully_4.py Sully_3.py >> diff_out
+diff Sully_3.py Sully_2.py >> diff_out
+diff Sully_2.py Sully_1.py >> diff_out
+diff Sully_1.py Sully_0.py >> diff_out
+diff diff_model diff_out && echo '[ OK ]' || echo '[ KO ]'
 
 cd ../..
 echo
