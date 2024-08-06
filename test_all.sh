@@ -52,6 +52,7 @@ diff Sully_3.py Sully_2.py >> diff_out
 diff Sully_2.py Sully_1.py >> diff_out
 diff Sully_1.py Sully_0.py >> diff_out
 diff diff_model diff_out && echo '[ OK ]' || echo '[ KO ]'
+rm diff_out
 
 cd ../..
 echo
