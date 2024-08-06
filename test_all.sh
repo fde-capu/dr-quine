@@ -40,7 +40,7 @@ rm b
 echo -n "=== Grace/Python =====> "
 cd ../../Grace/Python
 ./Grace.py > b
-diff Grace.py b > /dev/null && echo '[ OK ]' || echo '[ KO ]'
+diff Grace.py Grace_kid.py > /dev/null && echo '[ OK ]' || echo '[ KO ]'
 rm b
 
 echo -n "=== Sully/Python =====> "
