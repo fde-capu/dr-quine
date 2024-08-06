@@ -1,8 +1,7 @@
 *.o
 Colleen
-!Colleen.s
 Grace
 Grace_kid*
 Sully_*
 Sully
-!diff_modelc
+!diff_model
